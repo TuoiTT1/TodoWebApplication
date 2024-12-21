@@ -1,11 +1,11 @@
-Code backend Web API CRUD
+**Code backend Web API CRUD**
 Tech:  .NET 8
 SQL : SQL Server
 ORM: Dapper
 Pattern: CQRS, Mediator
 Architecture: DDD
 
-sample structure src:
+**sample structure src:**
 src/
 ├── WebAPI/                     # Lớp API chính
 │   ├── Controllers/            # Controllers xử lý yêu cầu HTTP
@@ -53,3 +53,11 @@ src/
 ├── IntegrationTests/       # Integration Tests (API + Database)
 │   ├── WebAPI/
 └── TestUtilities/          # Tiện ích hỗ trợ kiểm thử (mock, stub)
+
+**Flow xử lý:**
+1. API Call: gửi HTTP request đến api/...
+2. Mediator: Controller gọi IMediator.Send để gửi command
+3. Command Handler: handler xử lý logic
+4. Repository: thực hiện truy vấn  SQL
+5. Return result: successfuly or Failed
+   
