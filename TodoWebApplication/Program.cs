@@ -17,6 +17,13 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IDbConnection>(_ =>
     new SqlConnection(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Cấu hình logging
+builder.Logging.ClearProviders();           // Xóa các provider mặc định nếu không cần
+builder.Logging.AddConsole();               // Ghi log ra console
+builder.Logging.AddDebug();                 // Ghi log vào Debug Output (VS)
+//builder.Logging.AddEventLog();              // Ghi log vào Windows Event Log (nếu cần)
+
+
 // add MediatR services
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
