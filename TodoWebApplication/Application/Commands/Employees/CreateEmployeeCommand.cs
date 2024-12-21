@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using TodoWebApplication.Domain.Interfaces;
 using TodoWebApplication.Domain.Entities;
+using TodoWebApplication.Domain.Enums;
 
 namespace TodoWebApplication.Application.Commands.Employees;
-public record CreateEmployeeCommand(string Name, string Position, int Level) : IRequest<int>;
+public record CreateEmployeeCommand(string Name, string Position, EmployeeLevel Level) : IRequest<int>;
 
 public class CreateEmployeeCommandHandler : IRequestHandler<CreateEmployeeCommand, int>
 {

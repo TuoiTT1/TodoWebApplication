@@ -1,7 +1,9 @@
 ﻿using System.Data;
 using System.Reflection;
+using Dapper;
 using Microsoft.Data.SqlClient;
 using TodoWebApplication.Domain.Interfaces;
+using TodoWebApplication.Infrastructure.Persistence;
 using TodoWebApplication.Infrastructure.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,6 +30,10 @@ builder.Logging.AddDebug();                 // Ghi log vào Debug Output (VS)
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+
+// Đăng ký Dapper TypeHandler trong dịch vụ ứng dụng
+SqlMapper.AddTypeHandler(new EmployeeLevelHandler());
 
 
 var app = builder.Build();
