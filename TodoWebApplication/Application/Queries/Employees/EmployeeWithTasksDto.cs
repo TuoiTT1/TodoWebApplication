@@ -3,7 +3,7 @@ using TodoWebApplication.Domain.Enums;
 
 namespace TodoWebApplication.Application.Queries.Employees
 {
-    public class GetEmployeeDto
+    public class EmployeeWithTasksDto
     {
         public int Id { get; set; }
         public string Name { get; init; }
@@ -11,26 +11,19 @@ namespace TodoWebApplication.Application.Queries.Employees
 
         [JsonConverter(typeof(JsonStringEnumConverter))]  // Chuyển Enum thành string khi serialize
         public EmployeeLevel Level { get; set; }
+        public List<TaskDetailDto> TaskDetails { get; set; }
 
-        public GetEmployeeDto()
+        public EmployeeWithTasksDto()
         {
         }
 
-        public GetEmployeeDto(int id, string name, string position, EmployeeLevel level)
+        public EmployeeWithTasksDto(int id, string name, string position, EmployeeLevel level, List<TaskDetailDto> taskDetails)
         {
             Id = id;
             Name = name;
             Position = position;
             Level = level;
-        }
-
-        public override string ToString()
-        {
-            return
-                $"Id: {Id}, " +
-                $"Name: {Name}, " +
-                $"Position: {Position}" +
-                $"Level: {Level}";
+            TaskDetails = taskDetails;
         }
     }
 }

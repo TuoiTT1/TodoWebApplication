@@ -123,5 +123,18 @@ namespace TodoWebApplication.Controllers
 
         }
 
+        [HttpGet("{employeeId}/tasks")]
+        public async Task<IActionResult> GetTasksByEmployeeId(int employeeId)
+        {
+            _logger.LogInformation($"Getting tasks for employee with ID {employeeId}");
+            var result = await _mediator.Send(new GetListEmployeeTaskListQuery(employeeId));
+            if (result == null)
+            {
+                _logger.LogWarning($"No tasks found for employee with ID {employeeId}");
+                return NotFound(new { Message = $"No tasks found for employee with ID {employeeId}" });
+            }
+             _logger.LogInformation($"Successfully retrieved tasks for employee with ID {employeeId}: {result}");
+            return Ok(result);
+        }
     }
 }

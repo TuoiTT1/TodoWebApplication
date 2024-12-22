@@ -1,4 +1,5 @@
-﻿using TodoWebApplication.Domain.Entities;
+﻿using TodoWebApplication.Application.Queries.Employees;
+using TodoWebApplication.Domain.Entities;
 
 namespace TodoWebApplication.Domain.Interfaces
 {
@@ -9,5 +10,7 @@ namespace TodoWebApplication.Domain.Interfaces
         Task<int> AddAsync(Employee employee);
         Task<bool> UpdateAsync(Employee employee);
         Task<bool> DeleteAsync(int id);
+        Task<EmployeeWithTasksDto> GetEmployeeWithTasksAsync(int id);
+
     }
 }
